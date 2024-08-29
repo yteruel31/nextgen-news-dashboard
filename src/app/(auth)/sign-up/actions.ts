@@ -6,13 +6,14 @@ import { rateLimitByIp } from "@/lib/limiter";
 import { registerUserService } from "@/services/users";
 import { setSession } from "@/lib/session";
 import { z } from "zod";
+import { passwordValidation } from "@/util/password";
 
 export const signUpAction = unauthenticatedAction
   .createServerAction()
   .input(
     z.object({
       email: z.string().email(),
-      password: z.string().min(8),
+      password: z.string().min(8).regex(passwordValidation),
     }),
   )
   .handler(async ({ input }) => {
