@@ -1,5 +1,7 @@
 import Link from "next/link";
-import { HeaderLogin } from "@/app/_header/header-login";
+import { HeaderSignIn } from "@/app/_header/header-sign-in";
+import { HeaderSignOut } from "@/app/_header/header-sign-out";
+import { SignedIn, SignedOut } from "@/components/auth";
 
 export async function Header() {
   return (
@@ -10,7 +12,12 @@ export async function Header() {
             NextGen News
           </span>
         </Link>
-        <HeaderLogin />
+        <SignedIn>
+          <HeaderSignOut />
+        </SignedIn>
+        <SignedOut>
+          <HeaderSignIn />
+        </SignedOut>
       </div>
     </div>
   );

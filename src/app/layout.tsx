@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/app/_header/header";
 import { TooltipProvider } from "@/components/_ui/Tooltip";
+import { Toaster } from "@/components/_ui/Toaster";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,6 +24,7 @@ export default function RootLayout({
           <Header />
           {children}
         </TooltipProvider>
+        <Toaster />
       </body>
     </html>
   );
