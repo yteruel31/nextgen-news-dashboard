@@ -14,10 +14,13 @@ import { passwordValidation } from "@/util/password";
 const signUpSchema = z
   .object({
     email: z.string().email(),
-    password: z.string().min(8).regex(passwordValidation, {
-      message:
-        "Your password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.",
-    }),
+    password: z
+      .string()
+      .min(8, { message: "Your password must contain 8 characters." })
+      .regex(passwordValidation, {
+        message:
+          "Your password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.",
+      }),
     passwordConfirmation: z.string().min(1),
   })
   .refine((data) => data.password === data.passwordConfirmation, {

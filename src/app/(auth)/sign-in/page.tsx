@@ -10,10 +10,17 @@ import { useServerAction } from "zsa-react";
 import { useToast } from "@/components/_ui/use-toast";
 import { signInAction } from "@/app/(auth)/sign-in/actions";
 import { ErrorMessage } from "@/components/_ui/Inputs/ErrorMessage";
+import { passwordValidation } from "@/util/password";
 
 const signInSchema = z.object({
   email: z.string().email(),
-  password: z.string().min(8),
+  password: z
+    .string()
+    .min(8, { message: "Your password must contain 8 characters." })
+    .regex(passwordValidation, {
+      message:
+        "Your password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.",
+    }),
 });
 
 export default function SignInPage() {
