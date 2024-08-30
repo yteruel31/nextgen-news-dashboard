@@ -3,10 +3,12 @@ import {
   HydrationBoundary,
   QueryClient,
 } from "@tanstack/react-query";
-import { ArticlesFeed } from "@/app/(home)/articles-feed";
-import { getArticlesAction } from "@/app/(home)/actions";
+import { ArticlesFeed } from "@/app/feed/articles-feed";
+import { getArticlesAction } from "@/app/feed/actions";
+import { assertAuthenticated } from "@/lib/auth";
 
 export default async function Home() {
+  await assertAuthenticated();
   const queryClient = new QueryClient();
 
   await queryClient.prefetchInfiniteQuery({

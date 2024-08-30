@@ -1,3 +1,6 @@
+export const AUTHENTICATION_ERROR_MESSAGE =
+  "You must be logged in to view this content";
+
 export class PublicError extends Error {
   constructor(message: string) {
     super(message);
@@ -6,7 +9,7 @@ export class PublicError extends Error {
 
 export class AuthenticationError extends PublicError {
   constructor() {
-    super("You must be logged in to view this content");
+    super(AUTHENTICATION_ERROR_MESSAGE);
     this.name = "AuthenticationError";
   }
 }

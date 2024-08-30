@@ -1,9 +1,10 @@
 "use client";
 
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { ArticleCard } from "@/app/(home)/article-card";
+import { Article } from "@/app/feed/article";
 import { InfiniteScroller } from "@/components/infinite-scroll";
-import { getArticlesAction } from "@/app/(home)/actions";
+import { getArticlesAction } from "@/app/feed/actions";
+import React from "react";
 
 export const ArticlesFeed = () => {
   const { data, hasNextPage, fetchNextPage } = useInfiniteQuery({
@@ -33,7 +34,7 @@ export const ArticlesFeed = () => {
             className="flex flex-col gap-5"
           >
             {page.response.results.map((article) => (
-              <ArticleCard key={article.id} data={article} />
+              <Article key={article.id} data={article} />
             ))}
           </section>
         ))}

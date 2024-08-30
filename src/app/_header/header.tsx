@@ -2,6 +2,7 @@ import Link from "next/link";
 import { HeaderSignIn } from "@/app/_header/header-sign-in";
 import { HeaderSignOut } from "@/app/_header/header-sign-out";
 import { SignedIn, SignedOut } from "@/components/auth";
+import { HeaderLinks } from "@/app/_header/header-links";
 
 export async function Header() {
   return (
@@ -14,7 +15,10 @@ export async function Header() {
             </span>
           </Link>
           <SignedIn>
-            <HeaderSignOut />
+            <div className="flex gap-5">
+              <HeaderLinks />
+              <HeaderSignOut />
+            </div>
           </SignedIn>
           <SignedOut>
             <HeaderSignIn />

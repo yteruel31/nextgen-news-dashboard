@@ -27,4 +27,8 @@ export interface GetArticlesResponseDto {
   fields: {
     thumbnail: string;
   };
+  tags: {
+    id: string;
+    sectionId: string;
+  }[];
 }

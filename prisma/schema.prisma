@@ -14,13 +14,14 @@ datasource db {
 }
 
 model User {
-  id        String    @id @default(cuid())
-  email     String    @unique
-  sessions  Session[]
-  account   Account?
-  profile   Profile?
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
+  id            String         @id @default(cuid())
+  email         String         @unique
+  sessions      Session[]
+  savedArticles SavedArticle[]
+  account       Account?
+  profile       Profile?
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
 }
 
 model Session {
@@ -52,6 +53,35 @@ model Profile {
   user        User     @relation(fields: [userId], references: [id])
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+}
+
+model SavedArticle {
+  id          String                   @id @default(cuid())
+  articleId   String
+  userId      String
+  user        User                     @relation(fields: [userId], references: [id])
+  createdAt   DateTime                 @default(now())
+  updatedAt   DateTime                 @updatedAt
+  keywordTags SavedArticleKeywordTag[]
+}
+
+model KeywordTag {
+  id            String                   @id @default(cuid())
+  keyword       String
+  createdAt     DateTime                 @default(now())
+  updatedAt     DateTime                 @updatedAt
+  savedArticles SavedArticleKeywordTag[]
+}
+
+model SavedArticleKeywordTag {
+  savedArticleId String
+  keywordTagId   String
+  savedArticle   SavedArticle @relation(fields: [savedArticleId], references: [id])
+  keywordTag     KeywordTag   @relation(fields: [keywordTagId], references: [id])
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  @@id([savedArticleId, keywordTagId])
 }
 
 enum AccountType {
