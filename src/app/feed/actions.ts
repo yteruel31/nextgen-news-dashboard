@@ -56,4 +56,5 @@ export const saveArticleAction = authenticatedAction
     );
 
     revalidatePath("/saved-articles");
+    revalidatePath("/feed");
   });

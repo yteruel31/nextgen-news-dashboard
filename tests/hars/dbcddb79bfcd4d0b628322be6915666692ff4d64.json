@@ -1,0 +1,43 @@
+{
+  "response": {
+    "status": "ok",
+    "userTier": "developer",
+    "total": 2523563,
+    "startIndex": 1,
+    "pageSize": 10,
+    "currentPage": 1,
+    "pages": 252357,
+    "orderBy": "relevance",
+    "results": [
+      {
+        "id": "article-1",
+        "type": "article",
+        "sectionId": "commentisfree",
+        "sectionName": "Opinion",
+        "webPublicationDate": "2017-12-12T06:00:26Z",
+        "webTitle": "Article 1",
+        "webUrl": "https://www.theguardian.com/commentisfree/2017/dec/12/harry-potter-magic-jk-rowling",
+        "apiUrl": "https://content.guardianapis.com/commentisfree/2017/dec/12/harry-potter-magic-jk-rowling",
+        "fields": {
+          "thumbnail": "https://media.guim.co.uk/c66852bfdbebb7c12cf66b9b98ccc3fd55fafabf/0_13_640_384/500.jpg"
+        },
+        "tags": [
+          {
+            "id": "books/harrypotter",
+            "type": "keyword",
+            "sectionId": "books",
+            "sectionName": "Books",
+            "webTitle": "Harry Potter",
+            "webUrl": "https://www.theguardian.com/books/harrypotter",
+            "apiUrl": "https://content.guardianapis.com/books/harrypotter",
+            "references": []
+          }
+        ],
+        "isHosted": false,
+        "pillarId": "pillar/opinion",
+        "pillarName": "Opinion",
+        "isSaved": false
+      }
+    ]
+  }
+}

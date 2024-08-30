@@ -40,7 +40,7 @@ model Account {
   salt        String?
   accountType AccountType
   userId      String      @unique
-  user        User        @relation(fields: [userId], references: [id])
+  user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
 }
@@ -50,7 +50,7 @@ model Profile {
   displayName String?
   image       String?
   userId      String   @unique
-  user        User     @relation(fields: [userId], references: [id])
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
@@ -59,7 +59,7 @@ model SavedArticle {
   id          String                   @id @default(cuid())
   articleId   String
   userId      String
-  user        User                     @relation(fields: [userId], references: [id])
+  user        User                     @relation(fields: [userId], references: [id], onDelete: Cascade)
   createdAt   DateTime                 @default(now())
   updatedAt   DateTime                 @updatedAt
   keywordTags SavedArticleKeywordTag[]
@@ -76,7 +76,7 @@ model KeywordTag {
 model SavedArticleKeywordTag {
   savedArticleId String
   keywordTagId   String
-  savedArticle   SavedArticle @relation(fields: [savedArticleId], references: [id])
+  savedArticle   SavedArticle @relation(fields: [savedArticleId], references: [id], onDelete: Cascade)
   keywordTag     KeywordTag   @relation(fields: [keywordTagId], references: [id])
   createdAt      DateTime     @default(now())
   updatedAt      DateTime     @updatedAt
