@@ -25,12 +25,14 @@ export const ArticleCard = ({
           {data.webTitle}
         </h3>
       </div>
-      <Image
-        src={data.fields.thumbnail}
-        alt={"Article thumbnail"}
-        width={700}
-        height={500}
-      />
+      {data.fields?.thumbnail && (
+        <Image
+          src={data.fields?.thumbnail}
+          alt={"Article thumbnail"}
+          width={700}
+          height={500}
+        />
+      )}
       <div className="border-t border-gray-200">
         <dl>
           <div className="px-4 py-5 flex items-center justify-between">

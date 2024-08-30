@@ -28,3 +28,22 @@ export async function getSavedArticlesByUserId(userId: string) {
     },
   });
 }
+
+export async function getSavedArticlesKeywordsByUserId(userId: string) {
+  return database.savedArticle.findMany({
+    where: {
+      userId,
+    },
+    select: {
+      keywordTags: {
+        select: {
+          keywordTag: {
+            select: {
+              keyword: true,
+            },
+          },
+        },
+      },
+    },
+  });
+}
