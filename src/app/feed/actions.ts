@@ -9,16 +9,7 @@ import {
   getSavedArticleByArticleIdAndUserId,
 } from "@/repositories/db/saved-articles";
 import { revalidatePath } from "next/cache";
-import { getPersonalizedArticlesService } from "@/services/saved-articles";
 import { NotFoundError } from "@/services/errors";
-
-export const getPersonalizedArticlesAction = async ({
-  pageParam,
-}: {
-  pageParam: number;
-}) => {
-  return getPersonalizedArticlesService(pageParam);
-};
 
 export const unsaveArticleAction = authenticatedAction
   .createServerAction()

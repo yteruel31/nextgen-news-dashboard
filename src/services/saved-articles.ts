@@ -48,7 +48,7 @@ export const getArticlesService = async (
     "show-fields": "thumbnail",
     page,
     "page-size": 10,
-    section,
+    section: section ?? undefined,
   });
 
   const response = await fetch(

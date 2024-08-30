@@ -3,23 +3,13 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { Article } from "@/app/feed/article";
 import { InfiniteScroller } from "@/components/infinite-scroll";
-import { getPersonalizedArticlesAction } from "@/app/feed/actions";
 import React from "react";
+import { personalizedArticlesOptions } from "@/app/feed/feed.query";
 
 export const ArticlesFeed = () => {
-  const { data, hasNextPage, fetchNextPage } = useInfiniteQuery({
-    queryKey: ["personalized_articles"],
-    queryFn: ({ pageParam }) =>
-      getPersonalizedArticlesAction({ pageParam: pageParam }),
-    initialPageParam: 1,
-    getNextPageParam: (lastPage, _allPages, lastPageParam) => {
-      if (lastPage.response.pages === lastPageParam) {
-        return undefined;
-      }
-
-      return lastPageParam + 1;
-    },
-  });
+  const { data, hasNextPage, fetchNextPage } = useInfiniteQuery(
+    personalizedArticlesOptions,
+  );
 
   return (
     <div>

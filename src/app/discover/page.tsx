@@ -3,25 +3,13 @@ import {
   HydrationBoundary,
   QueryClient,
 } from "@tanstack/react-query";
-import { getArticlesAction } from "@/app/discover/actions";
 import { ArticlesDiscover } from "@/app/discover/articles-discover";
+import { articlesOptions } from "@/app/discover/discover.query";
 
 export default async function Discover() {
   const queryClient = new QueryClient();
 
-  await queryClient.prefetchInfiniteQuery({
-    queryKey: ["articles"],
-    queryFn: getArticlesAction,
-    initialPageParam: 1,
-    pages: 1,
-    getNextPageParam: (lastPage, _allPages, lastPageParam) => {
-      if (lastPage.response.pages === lastPageParam) {
-        return undefined;
-      }
-
-      return lastPageParam + 1;
-    },
-  });
+  await queryClient.prefetchInfiniteQuery(articlesOptions());
 
   return (
     <main>

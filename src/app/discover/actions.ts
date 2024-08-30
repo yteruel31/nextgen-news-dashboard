@@ -1,6 +1,5 @@
 "use server";
 
-import { getArticlesService } from "@/services/saved-articles";
 import { authenticatedAction } from "@/lib/safe-action";
 import { z } from "zod";
 import { assertAuthenticated } from "@/lib/auth";
@@ -11,16 +10,6 @@ import {
 } from "@/repositories/db/saved-articles";
 import { NotFoundError } from "@/services/errors";
 import { revalidatePath } from "next/cache";
-
-export const getArticlesAction = async ({
-  pageParam,
-  section,
-}: {
-  pageParam: number;
-  section?: string | null;
-}) => {
-  return getArticlesService(pageParam, section);
-};
 
 export const unsaveArticleAction = authenticatedAction
   .createServerAction()
