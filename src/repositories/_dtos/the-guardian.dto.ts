@@ -32,3 +32,16 @@ export interface GetArticlesResponseDto {
     sectionId: string;
   }[];
 }
+
+export interface GetSectionsResponseDto {
+  id: string;
+  webTitle: string;
+  webUrl: string;
+  apiUrl: string;
+  editions: {
+    id: string;
+    webTitle: string;
+    webUrl: string;
+    apiUrl: string;
+  }[];
+}

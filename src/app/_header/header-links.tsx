@@ -3,6 +3,9 @@ import { Anchor } from "@/components/_ui/Anchor";
 export const HeaderLinks = () => {
   return (
     <>
+      <Anchor href="/discover" variant="ghost">
+        Discover
+      </Anchor>
       <Anchor href="/feed" variant="ghost">
         My feed
       </Anchor>

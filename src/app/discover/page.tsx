@@ -3,17 +3,15 @@ import {
   HydrationBoundary,
   QueryClient,
 } from "@tanstack/react-query";
-import { ArticlesFeed } from "@/app/feed/articles-feed";
-import { getPersonalizedArticlesAction } from "@/app/feed/actions";
-import { assertAuthenticated } from "@/lib/auth";
+import { getArticlesAction } from "@/app/discover/actions";
+import { ArticlesDiscover } from "@/app/discover/articles-discover";
 
-export default async function Home() {
-  await assertAuthenticated();
+export default async function Discover() {
   const queryClient = new QueryClient();
 
   await queryClient.prefetchInfiniteQuery({
-    queryKey: ["personalized_articles"],
-    queryFn: getPersonalizedArticlesAction,
+    queryKey: ["articles"],
+    queryFn: getArticlesAction,
     initialPageParam: 1,
     pages: 1,
     getNextPageParam: (lastPage, _allPages, lastPageParam) => {
@@ -30,7 +28,7 @@ export default async function Home() {
       <div className="max-w-[700px] mx-auto pt-20">
         <div className="flex flex-col gap-5">
           <HydrationBoundary state={dehydrate(queryClient)}>
-            <ArticlesFeed />
+            <ArticlesDiscover />
           </HydrationBoundary>
         </div>
       </div>
