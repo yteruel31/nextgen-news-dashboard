@@ -71,6 +71,7 @@ export async function getSavedArticlesKeywordsByUserId(userId: string) {
       userId,
     },
     select: {
+      articleId: true,
       keywordTags: {
         select: {
           keywordTag: {

@@ -8,8 +8,11 @@ import {
   getSavedArticlesByUserId,
   getSavedArticlesKeywordsByUserId,
 } from "@/repositories/db/saved-articles";
+import { Article } from "@/services/models/article.model";
 
-export const getSavedArticlesService = async () => {
+export const getSavedArticlesService = async (): Promise<
+  TheGuardianResponse<Article>
+> => {
   const user = await assertAuthenticated();
   const savedArticles = await getSavedArticlesByUserId(user.id);
 
@@ -17,13 +20,23 @@ export const getSavedArticlesService = async () => {
     `https://content.guardianapis.com/search?api-key=${env.GUARDIAN_API_KEY}&show-fields=thumbnail&ids=${savedArticles.map((article) => article.articleId).join(",")}`,
   );
 
-  const data: TheGuardianResponse<GetArticlesResponseDto> =
-    await response.json();
+  const {
+    response: { results, ...rest },
+  }: TheGuardianResponse<GetArticlesResponseDto> = await response.json();
 
-  return data;
+  return {
+    response: {
+      ...rest,
+      results: results.map((result) => ({
+        ...result,
+      })),
+    },
+  };
 };
 
-export const getPersonalizedArticlesService = async (page: number) => {
+export const getPersonalizedArticlesService = async (
+  page: number,
+): Promise<TheGuardianResponse<Article>> => {
   const user = await assertAuthenticated();
   const savedArticles = await getSavedArticlesKeywordsByUserId(user.id);
 
@@ -43,8 +56,19 @@ export const getPersonalizedArticlesService = async (page: number) => {
     { cache: "force-cache" },
   );
 
-  const data: TheGuardianResponse<GetArticlesResponseDto> =
-    await response.json();
+  const {
+    response: { results, ...rest },
+  }: TheGuardianResponse<GetArticlesResponseDto> = await response.json();
 
-  return data;
+  return {
+    response: {
+      ...rest,
+      results: results.map((result) => ({
+        ...result,
+        isSaved: savedArticles.some(
+          (article) => article.articleId === result.id,
+        ),
+      })),
+    },
+  };
 };

@@ -1,9 +1,9 @@
 import Image from "next/image";
-import { GetArticlesResponseDto } from "@/repositories/_dtos/the-guardian.dto";
 import React from "react";
+import { Article } from "@/services/models/article.model";
 
 interface ArticleCardProps {
-  data: GetArticlesResponseDto;
+  data: Article;
   renderActions: React.ReactNode;
 }
 
