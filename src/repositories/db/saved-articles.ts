@@ -21,6 +21,42 @@ export async function createSavedArticle(
   });
 }
 
+export async function deleteSavedArticle(id: string, userId: string) {
+  await database.savedArticle.update({
+    where: {
+      id,
+      userId,
+    },
+    data: {
+      keywordTags: {
+        deleteMany: {},
+      },
+    },
+  });
+
+  return database.savedArticle.delete({
+    where: {
+      id,
+      userId,
+    },
+    include: {
+      keywordTags: true,
+    },
+  });
+}
+
+export async function getSavedArticleByArticleIdAndUserId(
+  articleId: string,
+  userId: string,
+) {
+  return database.savedArticle.findFirst({
+    where: {
+      userId,
+      articleId,
+    },
+  });
+}
+
 export async function getSavedArticlesByUserId(userId: string) {
   return database.savedArticle.findMany({
     where: {

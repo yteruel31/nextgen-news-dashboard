@@ -39,7 +39,8 @@ export const getPersonalizedArticlesService = async (page: number) => {
   );
 
   const response = await fetch(
-    `https://content.guardianapis.com/search?api-key=${env.GUARDIAN_API_KEY}&show-fields=thumbnail&page=${page}&page-size=10&q=${keywords.join(" ")}&query-fields=body`,
+    `https://content.guardianapis.com/search?api-key=${env.GUARDIAN_API_KEY}&show-tags=keyword&show-fields=thumbnail&page=${page}&page-size=10&q=${keywords.join(" ")}&query-fields=body`,
+    { cache: "force-cache" },
   );
 
   const data: TheGuardianResponse<GetArticlesResponseDto> =

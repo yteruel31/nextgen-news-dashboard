@@ -1,10 +1,12 @@
+"use client";
+
 import { GetArticlesResponseDto } from "@/repositories/_dtos/the-guardian.dto";
-import { useServerAction } from "zsa-react";
-import { saveArticleAction } from "@/app/feed/actions";
-import { useToast } from "@/components/_ui/use-toast";
-import { MouseEvent } from "react";
-import { ArticleCard } from "@/components/article-card";
 import { Button } from "@/components/_ui/Button";
+import { ArticleCard } from "@/components/article-card";
+import { useToast } from "@/components/_ui/use-toast";
+import { useServerAction } from "zsa-react";
+import { MouseEvent } from "react";
+import { unsaveArticleAction } from "@/app/saved-articles/actions";
 
 interface ArticleProps {
   data: GetArticlesResponseDto;
@@ -13,12 +15,12 @@ interface ArticleProps {
 export const Article = ({ data }: ArticleProps) => {
   const { toast } = useToast();
 
-  const { execute: executeSaveArticle, isPending } = useServerAction(
-    saveArticleAction,
+  const { execute: executeUnsaveArticle, isPending } = useServerAction(
+    unsaveArticleAction,
     {
       onSuccess: () => {
         toast({
-          title: "Article saved",
+          title: "Article unsaved",
           variant: "success",
         });
       },
@@ -32,12 +34,11 @@ export const Article = ({ data }: ArticleProps) => {
     },
   );
 
-  const handleSaveArticle = async (evt: MouseEvent<HTMLButtonElement>) => {
+  const handleUnsaveArticle = async (evt: MouseEvent<HTMLButtonElement>) => {
     evt.preventDefault();
 
-    await executeSaveArticle({
+    await executeUnsaveArticle({
       articleId: data.id,
-      keywords: data.tags.map((tag) => tag.id),
     });
   };
 
@@ -45,8 +46,8 @@ export const Article = ({ data }: ArticleProps) => {
     <ArticleCard
       data={data}
       renderActions={
-        <Button variant="secondary" onClick={handleSaveArticle}>
-          Save
+        <Button variant="secondary" onClick={handleUnsaveArticle}>
+          Unsave
         </Button>
       }
     />

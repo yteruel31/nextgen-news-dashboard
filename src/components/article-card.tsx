@@ -1,19 +1,13 @@
 import Image from "next/image";
-import { Button } from "@/components/_ui/Button";
 import { GetArticlesResponseDto } from "@/repositories/_dtos/the-guardian.dto";
-import { MouseEvent } from "react";
+import React from "react";
 
 interface ArticleCardProps {
   data: GetArticlesResponseDto;
-  onSaved?: (event: MouseEvent<HTMLButtonElement>) => void;
-  hideSaveButton?: boolean;
+  renderActions: React.ReactNode;
 }
 
-export const ArticleCard = ({
-  data,
-  onSaved,
-  hideSaveButton = false,
-}: ArticleCardProps) => {
+export const ArticleCard = ({ data, renderActions }: ArticleCardProps) => {
   return (
     <a
       href={data.webUrl}
@@ -44,11 +38,7 @@ export const ArticleCard = ({
                 {data.webPublicationDate}
               </dd>
             </div>
-            {!hideSaveButton && (
-              <Button variant="secondary" onClick={onSaved}>
-                Save
-              </Button>
-            )}
+            {renderActions}
           </div>
         </dl>
       </div>
