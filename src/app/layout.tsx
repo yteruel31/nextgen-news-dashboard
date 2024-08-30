@@ -4,6 +4,7 @@ import "./globals.css";
 import { Header } from "@/app/_header/header";
 import { TooltipProvider } from "@/components/_ui/Tooltip";
 import { Toaster } from "@/components/_ui/Toaster";
+import QueryProvider from "@/components/query-provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,11 +21,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <TooltipProvider>
-          <Header />
-          {children}
-        </TooltipProvider>
-        <Toaster />
+        <QueryProvider>
+          <TooltipProvider>
+            <Header />
+            {children}
+          </TooltipProvider>
+          <Toaster />
+        </QueryProvider>
       </body>
     </html>
   );

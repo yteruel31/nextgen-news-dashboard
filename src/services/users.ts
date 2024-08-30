@@ -1,6 +1,6 @@
-import { createUser, getUserByEmail } from "@/repositories/users";
-import { createAccount, getAccountByUserId } from "@/repositories/accounts";
-import { createProfile } from "@/repositories/profiles";
+import { createUser, getUserByEmail } from "@/repositories/db/users";
+import { createAccount, getAccountByUserId } from "@/repositories/db/accounts";
+import { createProfile } from "@/repositories/db/profiles";
 import { LoginError, PublicError } from "@/services/errors";
 import { hashPassword } from "@/util/password";
 
