@@ -4,14 +4,18 @@ import { MouseEvent } from "react";
 import { ArticleCard } from "@/components/article-card";
 import { Button } from "@/components/_ui/Button";
 import { Article as ArticleModel } from "@/services/models/article.model";
-import { saveArticleAction, unsaveArticleAction } from "@/app/discover/actions";
 import { useQueryClient } from "@tanstack/react-query";
+import {
+  saveArticleAction,
+  unsaveArticleAction,
+} from "@/app/(articles)/actions";
 
 interface ArticleProps {
   data: ArticleModel;
+  cacheToInvalidate: ("personalized_articles" | "articles")[];
 }
 
-export const Article = ({ data }: ArticleProps) => {
+export const Article = ({ data, cacheToInvalidate }: ArticleProps) => {
   const { toast } = useToast();
   const queryClient = useQueryClient();
 
@@ -22,7 +26,7 @@ export const Article = ({ data }: ArticleProps) => {
         variant: "success",
       });
       queryClient.invalidateQueries({
-        queryKey: ["articles", "personalized_articles"],
+        queryKey: cacheToInvalidate,
       });
     },
     onError: ({ err }) => {
@@ -43,7 +47,7 @@ export const Article = ({ data }: ArticleProps) => {
           variant: "success",
         });
         queryClient.invalidateQueries({
-          queryKey: ["articles", "personalized_articles"],
+          queryKey: cacheToInvalidate,
         });
       },
       onError: ({ err }) => {

@@ -1,10 +1,10 @@
 "use client";
 
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { Article } from "@/app/feed/article";
+import { Article } from "@/app/(articles)/article";
 import { InfiniteScroller } from "@/components/infinite-scroll";
 import React from "react";
-import { personalizedArticlesOptions } from "@/app/feed/feed.query";
+import { personalizedArticlesOptions } from "@/app/(articles)/feed/feed.query";
 
 export const ArticlesFeed = () => {
   const { data, hasNextPage, fetchNextPage } = useInfiniteQuery(
@@ -25,7 +25,11 @@ export const ArticlesFeed = () => {
             className="flex flex-col gap-5"
           >
             {page.response.results.map((article) => (
-              <Article key={article.id} data={article} />
+              <Article
+                key={article.id}
+                data={article}
+                cacheToInvalidate={["personalized_articles"]}
+              />
             ))}
           </section>
         ))}

@@ -5,11 +5,15 @@ import {
 } from "@/repositories/_dtos/the-guardian.dto";
 import { assertAuthenticated } from "@/lib/auth";
 import {
+  createSavedArticle,
+  deleteSavedArticle,
+  getSavedArticleByArticleIdAndUserId,
   getSavedArticlesByUserId,
   getSavedArticlesKeywordsByUserId,
 } from "@/repositories/db/saved-articles";
 import { Article } from "@/services/models/article.model";
 import { generateParams } from "@/util/generate-params";
+import { NotFoundError } from "@/services/errors";
 
 export const getSavedArticlesService = async (): Promise<
   TheGuardianResponse<Article>
@@ -109,4 +113,34 @@ export const getPersonalizedArticlesService = async (
       })),
     },
   };
+};
+
+export const saveArticleService = async (
+  articleId: string,
+  keywords: string[],
+) => {
+  const user = await assertAuthenticated();
+
+  await createSavedArticle(
+    {
+      articleId: articleId,
+      userId: user.id,
+    },
+    keywords,
+  );
+};
+
+export const unsaveArticleService = async (articleId: string) => {
+  const user = await assertAuthenticated();
+
+  const savedArticle = await getSavedArticleByArticleIdAndUserId(
+    articleId,
+    user.id,
+  );
+
+  if (!savedArticle) {
+    throw new NotFoundError();
+  }
+
+  await deleteSavedArticle(savedArticle.id, user.id);
 };

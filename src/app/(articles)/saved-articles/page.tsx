@@ -1,5 +1,5 @@
 import { getSavedArticlesService } from "@/services/saved-articles";
-import { Article } from "@/app/saved-articles/article";
+import { Article } from "@/app/(articles)/saved-articles/article";
 
 export default async function Home() {
   const savedArticles = await getSavedArticlesService();

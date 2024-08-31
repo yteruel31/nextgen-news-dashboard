@@ -3,8 +3,8 @@ import {
   HydrationBoundary,
   QueryClient,
 } from "@tanstack/react-query";
-import { ArticlesDiscover } from "@/app/discover/articles-discover";
-import { articlesOptions } from "@/app/discover/discover.query";
+import { ArticlesDiscover } from "@/app/(articles)/discover/articles-discover";
+import { articlesOptions } from "@/app/(articles)/discover/discover.query";
 
 export default async function Discover() {
   const queryClient = new QueryClient();

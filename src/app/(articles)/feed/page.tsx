@@ -3,9 +3,9 @@ import {
   HydrationBoundary,
   QueryClient,
 } from "@tanstack/react-query";
-import { ArticlesFeed } from "@/app/feed/articles-feed";
+import { ArticlesFeed } from "@/app/(articles)/feed/articles-feed";
 import { assertAuthenticated } from "@/lib/auth";
-import { personalizedArticlesOptions } from "@/app/feed/feed.query";
+import { personalizedArticlesOptions } from "@/app/(articles)/feed/feed.query";
 
 export default async function Home() {
   await assertAuthenticated();

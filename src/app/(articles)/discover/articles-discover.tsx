@@ -4,8 +4,8 @@ import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import { InfiniteScroller } from "@/components/infinite-scroll";
 import React, { useState } from "react";
 import { GetSectionsResponseDto } from "@/repositories/_dtos/the-guardian.dto";
-import { Article } from "@/app/discover/article";
-import { articlesOptions } from "@/app/discover/discover.query";
+import { articlesOptions } from "@/app/(articles)/discover/discover.query";
+import { Article } from "@/app/(articles)/article";
 
 export const ArticlesDiscover = () => {
   const [section, setSection] = useState<string | undefined>(undefined);
@@ -44,7 +44,11 @@ export const ArticlesDiscover = () => {
             className="flex flex-col gap-5"
           >
             {page.response.results.map((article) => (
-              <Article key={article.id} data={article} />
+              <Article
+                key={article.id}
+                data={article}
+                cacheToInvalidate={["articles"]}
+              />
             ))}
           </section>
         ))}

@@ -12,7 +12,6 @@ export const articlesOptions = (section?: string) =>
       );
 
       const data: TheGuardianResponse<Article> = await response.json();
-      console.log(data);
       return data;
     },
     initialPageParam: 1,

@@ -5,8 +5,8 @@ import { ArticleCard } from "@/components/article-card";
 import { useToast } from "@/components/_ui/use-toast";
 import { useServerAction } from "zsa-react";
 import { MouseEvent } from "react";
-import { unsaveArticleAction } from "@/app/saved-articles/actions";
 import { Article as ArticleModel } from "@/services/models/article.model";
+import { unsaveArticleAction } from "@/app/(articles)/actions";
 
 interface ArticleProps {
   data: ArticleModel;
