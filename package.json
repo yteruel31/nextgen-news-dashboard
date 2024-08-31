@@ -5,8 +5,12 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "check": "npm run typecheck && npm run lint && npm run prettier:test",
+    "prettier:test": "prettier --check \"**/*.{ts,tsx}\"",
+    "prettier:write": "prettier --write \"**/*.{ts,tsx}\"",
     "start": "next start",
     "lint": "next lint",
+    "typecheck": "tsc --noEmit",
     "postinstall": "prisma generate"
   },
   "dependencies": {
