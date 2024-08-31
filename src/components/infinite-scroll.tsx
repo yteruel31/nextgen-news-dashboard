@@ -40,7 +40,7 @@ export const InfiniteScroller = forwardRef<HTMLDivElement, InfiniteScrollProps>(
       }
 
       return () => observer.disconnect();
-    }, []);
+    }, [fetchNextPage, hasNextPage]);
 
     return (
       <div ref={ref} {...props} style={{ overflowAnchor: "none" }}>

@@ -21,3 +21,5 @@ export const ErrorMessage = forwardRef<
     </p>
   );
 });
+
+ErrorMessage.displayName = "ErrorMessage";
