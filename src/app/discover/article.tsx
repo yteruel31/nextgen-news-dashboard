@@ -5,6 +5,7 @@ import { ArticleCard } from "@/components/article-card";
 import { Button } from "@/components/_ui/Button";
 import { Article as ArticleModel } from "@/services/models/article.model";
 import { saveArticleAction, unsaveArticleAction } from "@/app/discover/actions";
+import { useQueryClient } from "@tanstack/react-query";
 
 interface ArticleProps {
   data: ArticleModel;
@@ -12,12 +13,16 @@ interface ArticleProps {
 
 export const Article = ({ data }: ArticleProps) => {
   const { toast } = useToast();
+  const queryClient = useQueryClient();
 
   const { execute: executeSaveArticle } = useServerAction(saveArticleAction, {
     onSuccess: () => {
       toast({
         title: "Article saved",
         variant: "success",
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["articles", "personalized_articles"],
       });
     },
     onError: ({ err }) => {
@@ -36,6 +41,9 @@ export const Article = ({ data }: ArticleProps) => {
         toast({
           title: "Article unsaved",
           variant: "success",
+        });
+        queryClient.invalidateQueries({
+          queryKey: ["articles", "personalized_articles"],
         });
       },
       onError: ({ err }) => {
