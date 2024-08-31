@@ -4,6 +4,7 @@ import { TheGuardianResponse } from "@/repositories/_dtos/the-guardian.dto";
 import { Article } from "@/services/models/article.model";
 
 export const personalizedArticlesOptions = infiniteQueryOptions({
+  refetchOnMount: true,
   queryKey: ["personalized_articles"],
   queryFn: async ({ pageParam }) => {
     const response = await fetch(

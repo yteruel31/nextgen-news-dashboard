@@ -58,7 +58,12 @@ export default function SignInPage() {
         <ErrorMessage message={errors.email?.message} />
         <TextInput {...register("password")} label="Password" type="password" />
         <ErrorMessage message={errors.password?.message} />
-        <Button className="w-full" type="submit" disabled={!isValid}>
+        <Button
+          className="w-full"
+          type="submit"
+          disabled={!isValid}
+          isLoading={isPending}
+        >
           Sign In
         </Button>
       </form>

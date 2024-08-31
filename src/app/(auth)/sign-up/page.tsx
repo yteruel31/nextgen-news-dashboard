@@ -68,7 +68,12 @@ export default function RegisterPage() {
           type="password"
         />
         <ErrorMessage message={errors.passwordConfirmation?.message} />
-        <Button className="w-full" type="submit" disabled={!isValid}>
+        <Button
+          className="w-full"
+          type="submit"
+          disabled={!isValid}
+          isLoading={isPending}
+        >
           Register
         </Button>
       </form>

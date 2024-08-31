@@ -4,7 +4,11 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "media.guim.co.uk",
+        hostname: "**.guim.co.uk",
+      },
+      {
+        protocol: "http",
+        hostname: "**.guim.co.uk",
       },
     ],
   },

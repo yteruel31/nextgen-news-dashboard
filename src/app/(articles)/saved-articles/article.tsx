@@ -7,6 +7,8 @@ import { useServerAction } from "zsa-react";
 import { MouseEvent } from "react";
 import { Article as ArticleModel } from "@/services/models/article.model";
 import { unsaveArticleAction } from "@/app/(articles)/actions";
+import { useQueryClient } from "@tanstack/react-query";
+import { MaterialSymbol } from "react-material-symbol-icons";
 
 interface ArticleProps {
   data: ArticleModel;
@@ -14,14 +16,22 @@ interface ArticleProps {
 
 export const Article = ({ data }: ArticleProps) => {
   const { toast } = useToast();
+  const queryClient = useQueryClient();
 
-  const { execute: executeUnsaveArticle } = useServerAction(
+  const { execute: executeUnsaveArticle, isPending } = useServerAction(
     unsaveArticleAction,
     {
-      onSuccess: () => {
+      onSuccess: async () => {
         toast({
           title: "Article unsaved",
           variant: "success",
+        });
+        await queryClient.invalidateQueries({
+          queryKey: ["articles"],
+        });
+
+        await queryClient.invalidateQueries({
+          queryKey: ["personalized_articles"],
         });
       },
       onError: ({ err }) => {
@@ -46,7 +56,12 @@ export const Article = ({ data }: ArticleProps) => {
     <ArticleCard
       data={data}
       renderActions={
-        <Button variant="secondary" onClick={handleUnsaveArticle}>
+        <Button
+          variant="secondary"
+          onClick={handleUnsaveArticle}
+          isLoading={isPending}
+          rightSection={<MaterialSymbol icon="heart_broken" filled size="20" />}
+        >
           Unsave
         </Button>
       }

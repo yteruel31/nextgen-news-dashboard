@@ -19,20 +19,22 @@ export const ArticlesFeed = () => {
         loadingMessage={<>Loading...</>}
         endingMessage={<>No more articles</>}
       >
-        {data?.pages.map((page) => (
-          <section
-            key={page.response.currentPage}
-            className="flex flex-col gap-5"
-          >
-            {page.response.results.map((article) => (
-              <Article
-                key={article.id}
-                data={article}
-                cacheToInvalidate={["personalized_articles"]}
-              />
-            ))}
-          </section>
-        ))}
+        <div className="flex flex-col gap-5">
+          {data?.pages.map((page) => (
+            <section
+              key={page.response.currentPage}
+              className="flex flex-col gap-5"
+            >
+              {page.response.results.map((article) => (
+                <Article
+                  key={article.id}
+                  data={article}
+                  cacheToInvalidate={["personalized_articles"]}
+                />
+              ))}
+            </section>
+          ))}
+        </div>
       </InfiniteScroller>
     </div>
   );

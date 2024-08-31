@@ -1,23 +1,22 @@
-import {
-  dehydrate,
-  HydrationBoundary,
-  QueryClient,
-} from "@tanstack/react-query";
+import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import { ArticlesFeed } from "@/app/(articles)/feed/articles-feed";
 import { assertAuthenticated } from "@/lib/auth";
 import { personalizedArticlesOptions } from "@/app/(articles)/feed/feed.query";
+import getQueryClient from "@/app/getQueryClient";
 
-export default async function Home() {
+export default async function Feed() {
   await assertAuthenticated();
-  const queryClient = new QueryClient();
 
-  await queryClient.prefetchInfiniteQuery(personalizedArticlesOptions);
+  await getQueryClient().prefetchInfiniteQuery({
+    ...personalizedArticlesOptions,
+    pages: 1,
+  });
 
   return (
     <main>
-      <div className="max-w-[700px] mx-auto pt-20">
+      <div className="max-w-[700px] mx-auto pt-10 md:pt-20 px-4">
         <div className="flex flex-col gap-5">
-          <HydrationBoundary state={dehydrate(queryClient)}>
+          <HydrationBoundary state={dehydrate(getQueryClient())}>
             <ArticlesFeed />
           </HydrationBoundary>
         </div>

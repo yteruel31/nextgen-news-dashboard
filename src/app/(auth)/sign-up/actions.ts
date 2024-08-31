@@ -23,5 +23,5 @@ export const signUpAction = unauthenticatedAction
 
     await setSession(user.id);
 
-    return redirect("/");
+    redirect("/discover");
   });

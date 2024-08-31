@@ -10,9 +10,10 @@ const anchorVariants = cva(
       variant: {
         primary: "text-white bg-slate-600 hover:bg-slate-600/80",
         secondary: "hover:underline bg-white border border-black",
-        ghost: "hover:bg-accent hover:text-accent-foreground",
+        ghost: "hover:underline bg-white",
       },
       size: {
+        sm: "h-9 px-1 py-1 text-sm",
         md: "h-9 px-4 py-2 text-sm",
         lg: "h-10 px-6 text-md",
       },
@@ -30,17 +31,30 @@ interface AnchorProps
     VariantProps<typeof anchorVariants> {
   leftSection?: React.ReactNode;
   rightSection?: React.ReactNode;
+  active?: boolean;
 }
 
 export const Anchor = forwardRef<HTMLAnchorElement, AnchorProps>(
   (
-    { variant, className, size, children, leftSection, rightSection, ...rest },
+    {
+      variant,
+      className,
+      size,
+      children,
+      leftSection,
+      rightSection,
+      active,
+      ...rest
+    },
     ref,
   ) => (
     <Link
       {...rest}
       ref={ref}
-      className={cn(anchorVariants({ variant, size, className }))}
+      className={cn(
+        anchorVariants({ variant, size, className }),
+        active && "underline",
+      )} // Add active class
     >
       {leftSection}
       {children}

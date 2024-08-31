@@ -5,6 +5,7 @@ import { Article } from "@/services/models/article.model";
 
 export const articlesOptions = (section?: string) =>
   infiniteQueryOptions({
+    refetchOnMount: true,
     queryKey: ["articles", section],
     queryFn: async ({ pageParam }) => {
       const response = await fetch(

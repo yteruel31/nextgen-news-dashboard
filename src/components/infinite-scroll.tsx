@@ -1,18 +1,16 @@
 "use client";
 
-import React from "react";
+import React, { forwardRef, useEffect } from "react";
+import { FetchNextPageOptions } from "@tanstack/react-query";
 
 interface InfiniteScrollProps extends React.HTMLAttributes<HTMLDivElement> {
-  fetchNextPage: () => Promise<any>;
+  fetchNextPage: (options?: FetchNextPageOptions) => Promise<any>;
   hasNextPage: boolean;
   loadingMessage: React.ReactNode;
   endingMessage: React.ReactNode;
 }
 
-export const InfiniteScroller = React.forwardRef<
-  HTMLDivElement,
-  InfiniteScrollProps
->(
+export const InfiniteScroller = forwardRef<HTMLDivElement, InfiniteScrollProps>(
   (
     {
       fetchNextPage,
@@ -26,9 +24,10 @@ export const InfiniteScroller = React.forwardRef<
   ) => {
     const observerTarget = React.useRef(null);
 
-    React.useEffect(() => {
+    useEffect(() => {
       const observer = new IntersectionObserver(
         async (entries) => {
+          console.log(entries);
           if (entries[0]?.isIntersecting && hasNextPage) {
             await fetchNextPage();
           }
@@ -52,3 +51,5 @@ export const InfiniteScroller = React.forwardRef<
     );
   },
 );
+
+InfiniteScroller.displayName = "InfiniteScroller";

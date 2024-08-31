@@ -20,5 +20,5 @@ export const signInAction = unauthenticatedAction
     const user = await signInUseCase(input.email, input.password);
     await setSession(user.id);
 
-    redirect("/");
+    redirect("/discover");
   });
