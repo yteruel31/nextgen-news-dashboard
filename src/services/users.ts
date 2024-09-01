@@ -43,7 +43,7 @@ export async function registerUserService(email: string, password: string) {
   return { id: user.id };
 }
 
-export async function signInUseCase(email: string, password: string) {
+export async function signInUserService(email: string, password: string) {
   const user = await getUserByEmail(email);
 
   if (!user) {
