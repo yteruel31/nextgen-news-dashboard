@@ -11,6 +11,10 @@
 - Playwright
 - Prisma
 
+## Architecture
+
+<div align="center"><img src="./architecture.png" width=600 alt="image of desktop preview of coffee list"></div>
+
 ## How to Get Started
 
 ### Prerequisites
