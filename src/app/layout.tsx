@@ -7,6 +7,7 @@ import { Toaster } from "@/components/_ui/Toaster";
 import QueryProvider from "@/components/query-provider";
 import { Footer } from "@/components/footer";
 import { cn } from "@/lib/utils";
+import { ProgressBarProvider } from "@/components/_ui/ProgressBarProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,9 +26,11 @@ export default function RootLayout({
       <body className={cn("min-h-screen antialiased", inter.className)}>
         <QueryProvider>
           <TooltipProvider>
-            <Header />
-            {children}
-            <Footer />
+            <ProgressBarProvider>
+              <Header />
+              {children}
+              <Footer />
+            </ProgressBarProvider>
           </TooltipProvider>
           <Toaster />
         </QueryProvider>
