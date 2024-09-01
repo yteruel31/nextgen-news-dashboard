@@ -2,6 +2,8 @@
 
 <div align="center"><img src="./public/overview.png" width=300 alt="image of desktop preview of coffee list"></div>
 
+**DEMO** : https://nextgen-news-dashboard-production.up.railway.app/
+
 ## Stack used
 
 - Authentication (Lucia)
