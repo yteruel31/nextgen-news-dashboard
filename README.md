@@ -17,6 +17,18 @@
 
 <div align="center"><img src="./architecture.png" width=600 alt="image of desktop preview of coffee list"></div>
 
+## Core features implemented
+
+ - [x] User authentication
+ - [x] News article list on the home page
+   - available through `/discover`
+ - [x] A "Reading List" for saved articles
+   - available through `/saved-articles`
+ - [x] Category filter (e.g., Technology, Sports, Business)
+   - available through `/discover`
+ - [x] Personalized news feed based on user preferences
+   - available through `/feed`
+
 ## How to Get Started
 
 ### Prerequisites
