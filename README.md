@@ -22,13 +22,13 @@ This app does uses Docker and Docker Compose to run a postgres database, so you 
 1. `cp .env.sample .env`
 2. `yarn install`
 3. `docker compose up`
-4. `prisma migrate dev`
+4. `yarn run db:setup`
 5. `yarn run dev`
 
 ## Env Setup
 
-You'll need to following the steps below and make sure everything is setup and copy the necesssary values into your .env file:
+You'll need to following the steps below and make sure everything is setup and copy the necessary values into your .env file:
 
-### Database
+### The Guardian API
 
-This app uses postgres. Setup a database by running `docker compose up` and get your **DATABASE_URL**.
+This app uses The Guardian API. You'll need to get an API key from [The Guardian](https://open-platform.theguardian.com/access/). Copy the key into your .env file as `GUARDIAN_API_KEY`.
