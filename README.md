@@ -25,7 +25,7 @@ This app does uses Docker and Docker Compose to run a postgres database, so you 
 
 ## How to Run
 
-1. `cp .env.sample .env`
+1. `cp .env.sample .env` (make sure to fill in the necessary values, see below)
 2. `yarn install`
 3. `docker compose up`
 4. `yarn run db:setup`
