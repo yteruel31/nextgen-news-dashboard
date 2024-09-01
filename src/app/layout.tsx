@@ -6,6 +6,7 @@ import { TooltipProvider } from "@/components/_ui/Tooltip";
 import { Toaster } from "@/components/_ui/Toaster";
 import QueryProvider from "@/components/query-provider";
 import { Footer } from "@/components/footer";
+import { cn } from "@/lib/utils";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,7 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={cn("min-h-screen antialiased", inter.className)}>
         <QueryProvider>
           <TooltipProvider>
             <Header />

@@ -31,12 +31,15 @@ export const ArticleCard = ({ data, renderActions }: ArticleCardProps) => {
       <div className="border-t border-gray-200">
         <dl>
           <div className="px-4 py-5 flex items-center justify-between">
-            <div className="flex gap-4 items-center">
+            <div className="flex gap-3 items-center">
+              <div className="inline-flex items-center justify-center rounded-full px-2.5 py-0.5 font-semibold text-sm border-transparent bg-slate-700 text-white text-primary-foreground">
+                {data.sectionName}
+              </div>
               <dt className="text-sm font-medium text-gray-500">
                 Published on
               </dt>
               <dd className="text-sm text-gray-900">
-                {dayjs(data.webPublicationDate).format("DD MMMM YYYY")}
+                {dayjs(data.webPublicationDate).format("DD MMMM YYYY HH:mm")}
               </dd>
             </div>
             {renderActions}

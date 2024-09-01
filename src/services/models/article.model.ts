@@ -1,5 +1,6 @@
 export interface Article {
   id: string;
+  sectionName: string;
   webPublicationDate: string;
   webTitle: string;
   webUrl: string;
